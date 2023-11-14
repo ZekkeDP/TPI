@@ -1,0 +1,18 @@
+<div id="propuesta" class="center padded">
+     <div class="content">
+        <div class="row vert-pad">
+            <div id="contacto" class="left padded">
+                <h1>Tus ideas pueden ayudar</h1>
+                <p>Puedes compartirnos tus estrategias o ideas para combatir a la contaminación ambiental ayudando a la causa.</p>
+            </div>
+            <div id="contacto" class="right padded">
+                <form class="contact-form" method="post" action="{{ url_for("proyecto.mail") }}">
+                    <input name="name" placeholder="Nombre" required />
+                    <input name="email" placeholder="Correo" required type="email" />
+                    <textarea placeholder="Mensaje" name="message" required minlength="10"></textarea>
+                    <button class="btn full-width">Enviar</button>
+                </form>
+            </div>
+        </div>
+     </div>
+</div>

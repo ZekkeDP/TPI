@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TPI
+{% endblock %}
+
+{% block content %}
+    <div class="hero">
+        <div class="hero-content">
+            <div id="definicion" class="left">
+                <h1>Contaminación Ambiental</h1>
+                <h1>Problematica Social</h1>
+                <p>En actualidad, la contaminación se ha convertido en uno de los problemas más urgentes y preocupantes a nivel mundial.<br> Sus efectos negativos se hacen evidentes en diferentes ámbitos, como la salud, la biodiversidad y el cambio climático.<br> Es importante destacar que la contaminación está estrechamente relacionada con el contexto social en el que se desarrolla.<br> Ya que esta nace a partir de la carencia de concientización del ser humano. </p>
+                <a target="_blank" href="{{ url_for('static', filename='tpi.pdf')}}" class="btn">Informe</a>
+            </div>
+            <div class="right">
+                <img src="{{ url_for('static', filename='contaminacion.png') }}" width=600px />
+            </div>
+        </div>
+    </div>
+{% include 'proyecto/section-first.html' %}
+{% include 'proyecto/section-second.html' %}
+{% include 'proyecto/section-third.html' %}
+{% endblock %} 
