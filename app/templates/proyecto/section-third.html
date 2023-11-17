@@ -7,10 +7,10 @@
             </div>
             <div id="contacto" class="right padded">
                 <form class="contact-form" method="post" action="{{ url_for("proyecto.mail") }}">
-                    <input name="name" placeholder="Nombre" required />
+                    <input name="usuario" placeholder="Nombre" required />
                     <input name="email" placeholder="Correo" required type="email" />
-                    <textarea placeholder="Mensaje" name="message" required minlength="10"></textarea>
-                    <button class="btn full-width">Enviar</button>
+                    <textarea placeholder="propuestas" name="propuesta" required minlength="10"></textarea>
+                    <button type="submit" class="btn full-width">Enviar</button>
                 </form>
             </div>
         </div>

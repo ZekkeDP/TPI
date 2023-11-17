@@ -1,0 +1,16 @@
+<div class="center padded white-bg">
+    <div class="content padded">
+        <div class="hero padded">
+            <h1 style="color: #f84f07;" class="logo">Propuestas</h1>
+        </div>
+        <div class="padded">
+            {% for propuesta in propuestas %}
+                <div style="margin-bottom: 20px;" class="card">
+                    <h3 style="color: #f84f07">{{propuesta['usuario']}}</h3>
+                    <label style="font-size: 15px;">{{propuesta['email']}}</label>
+                    <p>{{propuesta['propuesta']}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
