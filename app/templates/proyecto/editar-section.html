@@ -1,0 +1,13 @@
+<div class="column center right padded">
+    <div class="hero second-bg padded">
+        <h1 class="logo">Editar</h1>
+    </div>
+    <div class="center padded">
+        <form class="contact-form" method="post" action="{{ url_for(("proyecto.editar_propuesta"), id=id)}}">
+                <input name="usuario" placeholder="Nombre" required />
+                <input name="email" placeholder="Correo" required type="email" />
+                <textarea placeholder="propuestas" name="propuesta" required minlength="10"></textarea>
+                <button type="submit" class="btn full-width">Enviar</button>
+        </form>
+    </div>
+</div>

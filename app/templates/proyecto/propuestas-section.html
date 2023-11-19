@@ -9,6 +9,21 @@
                     <h3 style="color: #f84f07">{{propuesta['usuario']}}</h3>
                     <label style="font-size: 15px;">{{propuesta['email']}}</label>
                     <p>{{propuesta['propuesta']}}</p>
+                    <h3 style="color: #f84f07; font-size: 30px;">Respuestas</h3>
+                    {% for respuesta in respuestas %}
+                        {% if respuesta['id_propuesta'] == propuesta['id'] %}
+                        <div class="padded respuesta">
+                            <p>{{respuesta['respuesta']}}</p>
+                            <a style="color: #f84f07; margin: 10px;" href="{{ url_for(('proyecto.borrar_respuesta'), id=respuesta.id) }}">Eliminar</a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    <form method="post" action="{{ url_for(('proyecto.respuesta'), id=propuesta.id) }}" class="contact-form">
+                        <textarea class="res" placeholder="Respuesta" name="respuesta"></textarea>
+                        <button type="submit" style="margin-bottom: 20px;" class="btn full-width">Enviar</button>
+                    </form>
+                    <a style="color: #f84f07; margin: 10px;" href="{{ url_for(('proyecto.borrar_propuesta'), id=propuesta.id) }}">Eliminar</a>
+                    <a style="color: #f84f07; margin: 10px;" href="{{ url_for(('proyecto.editar_propuesta'), id=propuesta.id) }}">Editar</a>
                 </div>
             {% endfor %}
         </div>

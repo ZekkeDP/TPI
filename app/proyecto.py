@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, render_template, request, url_for, redirect, abort
+    Blueprint, render_template, request, url_for, redirect, flash
 )
 
 import mysql.connector
@@ -41,8 +41,46 @@ def mail():
 def propuestas():
     cursor.execute('select * from propuestas')
     propuestas = cursor.fetchall()
+    cursor.execute('select * from respuestas')
+    respuestas = cursor.fetchall()
 
-    return render_template('proyecto/propuestas.html', propuestas=propuestas)
+    return render_template('proyecto/propuestas.html', propuestas=propuestas, respuestas=respuestas)
+
+@bp.route('/eliminar-propuesta/<id>')
+def borrar_propuesta(id):
+    cursor.execute(f"DELETE FROM propuestas WHERE id = {id}")
+    midb.commit()
+    
+
+    return redirect(url_for('proyecto.propuestas'))
+
+@bp.route('/editar/<id>', methods=['GET', 'POST'])
+def editar_propuesta(id):
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        email = request.form['email']
+        propuesta = request.form['propuesta']
+        sql = 'UPDATE propuestas SET usuario= %s, email = %s, propuesta = %s WHERE id = %s'
+        values = (usuario, email, propuesta, id)
+        cursor.execute(sql, values)
+        midb.commit()
+
+        return redirect(url_for('proyecto.propuestas'))
+
+    return render_template('proyecto/editar.html', id = id)
+
+@bp.route('/respuesta/<id>', methods=['POST'])
+def respuesta(id):
+    if request.method == 'POST':
+        respuesta = request.form['respuesta']
+        sql = 'insert into respuestas (id_propuesta, respuesta) values (%s, %s)'
+        values = (id, respuesta)
+        cursor.execute(sql, values)
+        midb.commit()
+
+
+    return redirect(url_for('proyecto.propuestas'))
+
 
 @bp.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -58,3 +96,21 @@ def registro():
         return render_template('proyecto/login.html')
 
     return render_template('proyecto/registro.html')
+
+
+@bp.route('/borrar-respuesta/<id>')
+def borrar_respuesta(id):
+    cursor.execute(f"DELETE FROM respuestas WHERE id = {id}")
+    midb.commit()
+
+    return redirect(url_for('proyecto.propuestas'))
+
+@bp.route('/editar-respuesta/<id>', methods=['GET', 'POST'])
+def editar_respuesta(id):
+    if request.method == 'POST':
+        respuesta = request.form['respuesta']
+        cursor.execute(f"UPDATE respuestas SET respuesta = {respuesta}")
+        midb.commit()
+        boo = False
+
+    return redirect(url_for('proyecto.propuestas', id = id, boo = True))

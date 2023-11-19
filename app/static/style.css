@@ -162,6 +162,10 @@ a.btn {
     width: calc(100% - 20px);
 }
 
+.contact-form .res {
+    height: 20px;
+}
+
 .full-width {
     width: 100%;
 }
@@ -183,4 +187,14 @@ a.btn {
 
 .second-bg {
     background-color: #efefef;
+}
+
+.respuesta {
+    background-color: #eee;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.respuesta p {
+    font-size: 14px;
 }
