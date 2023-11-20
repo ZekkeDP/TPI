@@ -1,8 +1,15 @@
 <div class="center padded">
     <div class="padded vert-pad">
         <div class="card">
-            <h1>Login</h1>
-
+            <h1 style="font-size: 40px;">Login</h1>
+            <form class="contact-form" method="post" action="{{ url_for("proyecto.login") }}">
+                <input name="email" placeholder="Correo Elctronico" required />
+                <input type="password" name="contraseña" placeholder="Contraseña" required />
+                <button type="submit" class="btn full-width">Login</button>
+            </form>
+            <div class="padded center">
+            <a href="{{ url_for('proyecto.registro') }}">Registrarse</a>
+            </div>
         </div>
     </div>
 </div>

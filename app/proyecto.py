@@ -15,11 +15,9 @@ cursor = midb.cursor(dictionary=True)
 
 bp = Blueprint('proyecto', __name__, url_prefix='/')
 
-login = False
-
-
 @bp.route('/', methods=['GET', 'POST'])
 
+    
 def index():
     return render_template('proyecto/index.html')
 
@@ -43,8 +41,11 @@ def propuestas():
     propuestas = cursor.fetchall()
     cursor.execute('select * from respuestas')
     respuestas = cursor.fetchall()
+    cursor.execute('select * from propuestas;')
+    n = cursor.fetchall()
+    print(n == [])
 
-    return render_template('proyecto/propuestas.html', propuestas=propuestas, respuestas=respuestas)
+    return render_template('proyecto/propuestas.html', propuestas=propuestas, respuestas=respuestas, n = n)
 
 @bp.route('/eliminar-propuesta/<id>')
 def borrar_propuesta(id):
@@ -105,12 +106,18 @@ def borrar_respuesta(id):
 
     return redirect(url_for('proyecto.propuestas'))
 
-@bp.route('/editar-respuesta/<id>', methods=['GET', 'POST'])
-def editar_respuesta(id):
-    if request.method == 'POST':
-        respuesta = request.form['respuesta']
-        cursor.execute(f"UPDATE respuestas SET respuesta = {respuesta}")
-        midb.commit()
-        boo = False
 
-    return redirect(url_for('proyecto.propuestas', id = id, boo = True))
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        email = request.form['email']
+        contraseña = request.form['contraseña']
+        cursor.execute('select * from usuarios')
+        usuarios = cursor.fetchall()
+        for usuario in usuarios:
+            if usuario['email'] == email and usuario['contraseña'] == contraseña:
+                current_user = email
+                return render_template('proyecto/index.html', current_user = current_user)
+
+
+    return render_template('proyecto/login.html')

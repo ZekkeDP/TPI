@@ -1,4 +1,4 @@
-<div class="center padded white-bg">
+<div class="center padded white-bg full-height">
     <div class="content padded">
         <div class="hero padded">
             <h1 style="color: #f84f07;" class="logo">Propuestas</h1>
@@ -26,6 +26,12 @@
                     <a style="color: #f84f07; margin: 10px;" href="{{ url_for(('proyecto.editar_propuesta'), id=propuesta.id) }}">Editar</a>
                 </div>
             {% endfor %}
+            {% if n == [] %}
+                <div class="hero hero-content center">
+                    <a style="margin: 10px; font-size: 20px;" href="{{ url_for('proyecto.index') }}"><h1 class="">Crea alguna Propuesta</h1></a>
+                </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
