@@ -202,3 +202,21 @@ a.btn {
 .full-height {
     height: 100%;
 }
+
+.footer p {
+    text-align: center;
+    color: #aaa;
+    margin: 10px;
+}
+
+.abajo .contact-form input {
+    width: 50%;
+}
+
+.abajo .contact-form textarea {
+    width: 50%;
+}
+
+.abajo .btn {
+    width: 50%;
+}

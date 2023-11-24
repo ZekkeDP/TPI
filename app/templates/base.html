@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/ico" href="{{ url_for('static', filename='icono.ico') }}">
 </head>
 
 <body>
@@ -16,34 +17,46 @@
         <div class="logo">Contaminación Ambiental</div>
         <nav>
             <ul>
-                <li><label>{{current_user}}</label></li>
                 <li><a href="{{ url_for('proyecto.index')}}">Inicio</a></li>
                 <li><a href="/#defi">Definicion</a></li>
                 <li><a href="/#tipos">Tipos</a></li>
+                <li><a href="/#causas">Causas</a></li>
                 <li><a href="/#contextosocial">Contexto Social</a></li>
+                <li><a href="/#proefe">Factores y Efectos</a></li>
+                <li><a href="/#estra">Estrategias</a></a></li>
                 <li><a href="{{ url_for('proyecto.propuestas') }}">Propuesta</a></li>
             </ul>
         </nav>
     </header>
     <section>{% block content %}{% endblock %}</section>
-    <div class="footer row">
+    <div style="padding-top: 0;" class="footer row">
         <div class="center full-width">
-            <div class="row">
-                <h3>Propuesta</h3>
-            </div> 
-        </div>
-        <div class="center full-width">
-            <div class="row">
-                <p>asdasd</p>
+            <div style="padding-top: 10px;" class="row center padded">
+                <div style="width: calc(50% - 40px);" class="column center">
+                    <h3 style="text-align: center;">Contaminacion Ambiental</h3>
+                    <p>Colegio Provincial Dr. Ernesto Guevara</p>
+                    <div class="row center">
+                        <p>Valentin Gandolfi</p>
+                        <p>|</p>
+                        <p>TPI</p>
+                        <p>|</p>
+                        <p>6°A 2023</p>
+                    </div>
+                </div>
+                <div class="content" style="width: calc(50% - 40px);">
+                    <div id="contacto" class="right padded">
+                        <h3 style="text-align: center;">Crea tu propuesta</h3>
+                        <form class="contact-form" method="post" action="{{ url_for("proyecto.mail") }}">
+                            <input name="usuario" placeholder="Nombre" required />
+                            <input name="email" placeholder="Correo" required type="email" />
+                            <textarea placeholder="Propuestas" name="propuesta" required minlength="10"></textarea>
+                            <button type="submit" class="btn full-width">Enviar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="center full-width info">
-            <div class="row">
-                <p style="display: inline-block;" class="text-info">Rio Grande, Tierra del Fuego</p>
-                <p style="display: inline-block;" class="text-info">Valentin Gandolfi</p>
-                <p style="display: inline-block;" class="text-info">Dr. Ernesto Guevara</p>
-            </div>
-        </div>
+        </div> 
     </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

@@ -7,7 +7,7 @@ import mysql.connector
 midb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="12345",
+    password="",
     database="TPI"
 )
 
@@ -15,11 +15,11 @@ cursor = midb.cursor(dictionary=True)
 
 bp = Blueprint('proyecto', __name__, url_prefix='/')
 
-@bp.route('/', methods=['GET', 'POST'])
 
-    
+@bp.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('proyecto/index.html')
+
 
 @bp.route('/mail', methods=['POST'])
 def mail():
@@ -52,7 +52,7 @@ def borrar_propuesta(id):
     cursor.execute(f"DELETE FROM propuestas WHERE id = {id}")
     midb.commit()
     
-
+    borrar_respuesta(id, False)
     return redirect(url_for('proyecto.propuestas'))
 
 @bp.route('/editar/<id>', methods=['GET', 'POST'])
@@ -100,9 +100,13 @@ def registro():
 
 
 @bp.route('/borrar-respuesta/<id>')
-def borrar_respuesta(id):
-    cursor.execute(f"DELETE FROM respuestas WHERE id = {id}")
-    midb.commit()
+def borrar_respuesta(id, bol = True):
+    if bol == False:
+        cursor.execute(f"DELETE FROM respuestas WHERE id_propuesta = {id}")
+        midb.commit()
+    else:
+        cursor.execute(f"DELETE FROM respuestas WHERE id = {id}")
+        midb.commit()
 
     return redirect(url_for('proyecto.propuestas'))
 
@@ -118,6 +122,5 @@ def login():
             if usuario['email'] == email and usuario['contraseña'] == contraseña:
                 current_user = email
                 return render_template('proyecto/index.html', current_user = current_user)
-
 
     return render_template('proyecto/login.html')
