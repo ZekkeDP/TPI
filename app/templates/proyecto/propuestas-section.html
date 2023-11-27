@@ -8,12 +8,14 @@
                 <div style="margin-bottom: 20px;" class="card">
                     <h3 style="color: #f84f07">{{propuesta['usuario']}}</h3>
                     <label style="font-size: 15px;">{{propuesta['email']}}</label>
+                    <label>{{propuesta['fecha']}}</label>
                     <p>{{propuesta['propuesta']}}</p>
                     <h3 style="color: #f84f07; font-size: 30px;">Respuestas</h3>
                     {% for respuesta in respuestas %}
                         {% if respuesta['id_propuesta'] == propuesta['id'] %}
                         <div class="padded respuesta">
                             <p>{{respuesta['respuesta']}}</p>
+                            <label>{{respuesta['fecha_respuesta']}}</label>
                             <a style="color: #f84f07; margin: 10px;" href="{{ url_for(('proyecto.borrar_respuesta'), id=respuesta.id) }}"><img src="{{ url_for('static', filename='bin.png') }}" width="20px" height="20px"></a>
                         </div>
                         {% endif %}
