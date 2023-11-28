@@ -1,7 +1,6 @@
 from flask import (
     Blueprint, render_template, request, url_for, redirect, flash
 )
-
 import mysql.connector
 
 midb = mysql.connector.connect(
@@ -19,7 +18,6 @@ bp = Blueprint('proyecto', __name__, url_prefix='/')
 @bp.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('proyecto/index.html')
-
 
 @bp.route('/mail', methods=['POST'])
 def mail():
@@ -58,11 +56,9 @@ def borrar_propuesta(id):
 @bp.route('/editar/<id>', methods=['GET', 'POST'])
 def editar_propuesta(id):
     if request.method == 'POST':
-        usuario = request.form['usuario']
-        email = request.form['email']
         propuesta = request.form['propuesta']
-        sql = 'UPDATE propuestas SET usuario= %s, email = %s, propuesta = %s WHERE id = %s'
-        values = (usuario, email, propuesta, id)
+        sql = 'UPDATE propuestas SET propuesta = %s, editado = true WHERE id = %s'
+        values = (propuesta, id)
         cursor.execute(sql, values)
         midb.commit()
 

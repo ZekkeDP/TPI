@@ -11,5 +11,6 @@ def create_app():
     from . import proyecto 
 
     app.register_blueprint(proyecto.bp)
+    
 
     return app

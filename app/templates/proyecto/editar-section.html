@@ -3,9 +3,7 @@
         <h1 class="logo">Editar</h1>
     </div>
     <div class="center padded">
-        <form class="contact-form" method="post" action="{{ url_for(("proyecto.editar_propuesta"), id=id)}}">
-                <input name="usuario" placeholder="Nombre" required />
-                <input name="email" placeholder="Correo" required type="email" />
+        <form class="contact-form" style="width: 50%;" method="post" action="{{ url_for(("proyecto.editar_propuesta"), id=id)}}">
                 <textarea placeholder="propuestas" name="propuesta" required minlength="10"></textarea>
                 <button type="submit" class="btn full-width">Enviar</button>
         </form>
